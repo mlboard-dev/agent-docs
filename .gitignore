@@ -1,0 +1,10 @@
+/outputs/
+__pycache__/
+*.pyc
+.env
+.env.*
+*.key
+*.pem
+*.p8
+credentials.json
+.DS_Store

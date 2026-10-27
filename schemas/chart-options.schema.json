@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "bar",
+        "scatter",
+        "boxplot",
+        "parallel_coordinates",
+        "embedding",
+        "distribution"
+      ]
+    },
+    "options": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "distribution"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "options": {
+            "type": "object",
+            "properties": {
+              "normalize": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "options": {
+            "type": "object",
+            "properties": {
+              "x_field": {
+                "type": "string",
+                "maxLength": 8192
+              },
+              "y_field": {
+                "type": "string",
+                "maxLength": 8192
+              },
+              "group_by": {
+                "type": "string",
+                "maxLength": 8192
+              },
+              "label_field": {
+                "type": "string",
+                "maxLength": 8192
+              },
+              "data_source": {
+                "enum": [
+                  "table",
+                  "runs"
+                ]
+              },
+              "aggregate": {
+                "enum": [
+                  "mean",
+                  "sum",
+                  "count",
+                  "last"
+                ]
+              },
+              "orientation": {
+                "enum": [
+                  "vertical",
+                  "horizontal"
+                ]
+              },
+              "dimensions": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8192
+                },
+                "minItems": 2,
+                "maxItems": 12,
+                "uniqueItems": true
+              },
+              "max_points": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 20000
+              },
+              "x_scale": {
+                "enum": [
+                  "linear",
+                  "log"
+                ]
+              },
+              "y_scale": {
+                "enum": [
+                  "linear",
+                  "log"
+                ]
+              },
+              "axis_scales": {
+                "type": "object",
+                "additionalProperties": {
+                  "enum": [
+                    "linear",
+                    "log"
+                  ]
+                },
+                "maxProperties": 12
+              },
+              "inverse_axes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 8192
+                },
+                "maxItems": 12,
+                "uniqueItems": true
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ]
+}

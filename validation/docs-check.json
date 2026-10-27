@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "documents": 57,
+  "local_links": 232,
+  "source_files": 48,
+  "json_files": 19,
+  "schema_references": 20,
+  "python_files": 4,
+  "html_scripts": 1,
+  "failures": [],
+  "scope": "Offline integrity and syntax only; HTTP/schema semantic verification is recorded separately in VALIDATION.md."
+}

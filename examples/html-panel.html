@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>已接收的实验展示点</title>
+<style>
+:root { color-scheme: light dark; font: 14px system-ui; }
+body { margin: 16px; background: Canvas; color: CanvasText; }
+h1 { font-size: 16px; }
+p { opacity: .7; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px; text-align: left; border-bottom: 1px solid color-mix(in srgb, CanvasText 15%, transparent); overflow-wrap: anywhere; }
+button { padding: 6px 10px; }
+</style>
+<h1>已接收的实验展示点</h1>
+<p id="status" role="status">等待已保存方案的宿主数据桥。</p>
+<button id="retry" disabled>重新读取</button>
+<table><thead><tr><th>Run</th><th>X</th><th>Value</th></tr></thead><tbody id="rows"></tbody></table>
+<script>
+let connection;
+let counter = 0;
+let attempts = 0;
+let pending = '';
+const status = document.getElementById('status');
+const body = document.getElementById('rows');
+const retry = document.getElementById('retry');
+function request() {
+  if (!connection) return;
+  attempts += 1;
+  pending = 'data_' + (++counter);
+  connection.port.postMessage({
+    protocol: connection.protocol,
+    instance_id: connection.instance_id,
+    nonce: connection.nonce,
+    request_id: pending,
+    type: 'data.query',
+    query_ref: 'q_loss'
+  });
+}
+retry.onclick = () => { attempts = 0; request(); };
+addEventListener('message', event => {
+  const init = event.data;
+  if (connection || event.source !== parent || !event.ports[0] ||
+      init?.protocol !== 'mlboard.html-bridge/v1' || init.type !== 'init' ||
+      typeof init.instance_id !== 'string' || typeof init.nonce !== 'string') return;
+  connection = { ...init, port: event.ports[0] };
+  connection.port.onmessage = ({ data }) => {
+    if (data?.protocol !== connection.protocol || data.instance_id !== connection.instance_id ||
+        data.nonce !== connection.nonce || data.request_id !== pending) return;
+    if (data.type === 'error') {
+      status.textContent = '数据尚不可用：' + String(data.error?.code || 'unknown');
+      if (data.error?.code === 'data_unavailable' && attempts < 8) setTimeout(request, 500);
+      return;
+    }
+    if (data.type !== 'response' || data.query_ref !== 'q_loss' || !Array.isArray(data.frames)) return;
+    body.replaceChildren();
+    let shown = 0;
+    for (const frame of data.frames) {
+      const c = frame.columns || {};
+      for (let index = 0; index < frame.row_count && shown < 30; index++) {
+        const row = document.createElement('tr');
+        const value = c.value_state?.[index] === 'finite' && Number.isFinite(c.value?.[index]) ? c.value[index] : null;
+        for (const field of [c.run_id?.[index], c.x?.[index], value]) {
+          const cell = document.createElement('td');
+          cell.textContent = field == null ? '—' : String(field);
+          row.appendChild(cell);
+        }
+        body.appendChild(row);
+        shown++;
+      }
+    }
+    status.textContent = '展示已接收投影中的前 ' + shown + ' 点；不是完整历史统计。' + (data.truncated ? ' 宿主投影已截断。' : '');
+  };
+  connection.port.start();
+  retry.disabled = false;
+  request();
+});
+</script>
+</html>

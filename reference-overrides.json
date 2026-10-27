@@ -1,0 +1,20 @@
+[
+  {
+    "file": "server/docs/api-contract.md",
+    "old": "Run selection is independently bounded at 50; scanned source records at 1,000,000;",
+    "new": "Private run selection is independently bounded at 1,000; series at 2,000; scanned source records at 10,000,000; public share selection retains its separate 50-run bound;",
+    "reason": "上游这一句仍是旧上限；按同提交 capabilities.go、query.schema.json 和 docs/query-performance.md 校正。"
+  },
+  {
+    "file": "server/docs/api-contract.md",
+    "old": "transform none/downsample min_max; explicit budgets.",
+    "new": "transform raw/downsample min_max; explicit budgets.",
+    "reason": "生产 query schema 的 transform.kind 为 raw 或 downsample；none 不是当前 wire 值。"
+  },
+  {
+    "file": "server/docs/agent-dashboards.md",
+    "old": "用户在该项目须有编辑权限；scope 与实时项目权限取交集。",
+    "new": "编辑项目共享方案须有项目编辑权限；项目 viewer 可在相应 scope 下创建和编辑自己的个人方案。scope 与实时项目权限、方案可见性和所有权取交集。",
+    "reason": "与上游本文末尾的个人方案权限及当前后端实现保持一致。"
+  }
+]

@@ -1,0 +1,591 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mlboard.query/v1",
+  "description": "Strict shared query syntax. Field/operator, kind, context, range types, permissions, int63 bounds and total budgets also require application validation.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "mlboard.query/v1"
+    },
+    "runs": {
+      "$ref": "#/$defs/selector"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "scalar",
+            "histogram",
+            "confusion_matrix",
+            "curve",
+            "table",
+            "media",
+            "embedding",
+            "text"
+          ]
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "context": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "name",
+              "context"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "kind",
+        "metrics"
+      ],
+      "additionalProperties": false
+    },
+    "x": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "enum": [
+            "step",
+            "epoch",
+            "wall_time",
+            "elapsed_seconds",
+            "processed_samples",
+            "session_elapsed_seconds"
+          ]
+        },
+        "range": {
+          "type": "object",
+          "properties": {
+            "gte": {
+              "type": [
+                "number",
+                "string"
+              ]
+            },
+            "lte": {
+              "type": [
+                "number",
+                "string"
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "field"
+      ],
+      "additionalProperties": false
+    },
+    "read": {
+      "type": "object",
+      "properties": {
+        "producers": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "enum": [
+                "primary",
+                "ids"
+              ]
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "minItems": 1,
+              "uniqueItems": true,
+              "maxItems": 50
+            }
+          },
+          "required": [
+            "mode"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "mode": {
+                    "const": "ids"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "ids"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "ids": false
+                }
+              }
+            }
+          ]
+        },
+        "sessions": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "enum": [
+                "all",
+                "ids"
+              ]
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "minItems": 1,
+              "uniqueItems": true,
+              "maxItems": 50
+            }
+          },
+          "required": [
+            "mode"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "mode": {
+                    "const": "ids"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "ids"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "ids": false
+                }
+              }
+            }
+          ]
+        },
+        "duplicate_steps": {
+          "enum": [
+            "latest_logical",
+            "all"
+          ]
+        },
+        "at_revision": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]{0,18})$",
+            "description": "Nonnegative signed-63-bit decimal string. Semantic validator must also enforce <=9223372036854775807."
+          }
+        }
+      },
+      "required": [
+        "producers",
+        "sessions",
+        "duplicate_steps"
+      ],
+      "additionalProperties": false
+    },
+    "consistency": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "enum": [
+            "exact",
+            "allow_stale"
+          ]
+        }
+      },
+      "required": [
+        "summary"
+      ],
+      "additionalProperties": false
+    },
+    "transform": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "raw"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "downsample"
+            },
+            "algorithm": {
+              "const": "min_max"
+            },
+            "algorithm_version": {
+              "const": "1"
+            },
+            "points_per_series": {
+              "type": "integer",
+              "minimum": 8,
+              "maximum": 2000
+            }
+          },
+          "required": [
+            "kind",
+            "algorithm",
+            "algorithm_version",
+            "points_per_series"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "window"
+            },
+            "width": {
+              "type": [
+                "number",
+                "string"
+              ]
+            },
+            "origin": {
+              "type": [
+                "number",
+                "string"
+              ]
+            },
+            "stats": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "mean",
+                  "min",
+                  "max",
+                  "std",
+                  "count",
+                  "missing_count"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "width",
+            "origin",
+            "stats"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "viewport": {
+      "type": "object",
+      "properties": {
+        "width_css_px": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "device_pixel_ratio": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 4
+        },
+        "lod": {
+          "enum": [
+            "auto",
+            "raw",
+            "overview"
+          ]
+        }
+      },
+      "required": [
+        "width_css_px"
+      ],
+      "additionalProperties": false
+    },
+    "reuse": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "result_etag": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          },
+          "required": [
+            "result_etag"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "mlboard.frame-reuse/v1"
+            },
+            "base_token": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9_.:-]+$"
+            }
+          },
+          "required": [
+            "schema_version",
+            "base_token"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "cursor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "max_runs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 1000
+        },
+        "max_series": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2000,
+          "default": 2000
+        },
+        "max_points": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 250000
+        },
+        "max_scanned_points": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000,
+          "default": 10000000,
+          "description": "Total original source records across selected runs and metrics, including duplicate-step superseded records. This is independent of returned/downsampled point and byte budgets."
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 8388608
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000,
+          "description": "Optional execution timeout in milliseconds. Omitted uses the instance data-read default; explicit values must not exceed its configured ceiling."
+        },
+        "on_exceed": {
+          "enum": [
+            "error",
+            "partial"
+          ]
+        },
+        "max_points_per_series": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "max_series",
+        "max_points",
+        "max_bytes",
+        "max_points_per_series"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "runs",
+    "source",
+    "x",
+    "read",
+    "transform",
+    "page",
+    "budget"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "selector": {
+      "type": "object",
+      "properties": {
+        "run_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "uniqueItems": true,
+          "maxItems": 1000
+        },
+        "path_prefixes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "uniqueItems": true,
+          "maxItems": 50
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "pattern": "^(state|run_path|run_path_depth|created_at|tags|config:/.*|summary:/.*)$"
+              },
+              "op": {
+                "enum": [
+                  "eq",
+                  "ne",
+                  "in",
+                  "not_in",
+                  "gt",
+                  "gte",
+                  "lt",
+                  "lte",
+                  "exists",
+                  "contains_any"
+                ]
+              },
+              "value": {}
+            },
+            "required": [
+              "field",
+              "op",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        },
+        "include_ungrouped": {
+          "type": "boolean"
+        },
+        "search": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "run_incarnations": {
+          "type": "object",
+          "maxProperties": 1000,
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "int63": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,18})$",
+      "description": "Nonnegative signed-63-bit decimal string. Semantic validator must also enforce <=9223372036854775807."
+    },
+    "metric": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "context"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

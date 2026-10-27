@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mlboard.native-examples/v1",
+  "description": "Native structured payload examples. Edge monotonicity, array dimensions/count totals, threshold/rate agreement and AUC require semantic validation.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "mlboard.native-examples/v1"
+    },
+    "histogram": {
+      "$ref": "#/$defs/histogram"
+    },
+    "confusion_matrix": {
+      "$ref": "#/$defs/confusion_matrix"
+    },
+    "threshold_curve": {
+      "$ref": "#/$defs/threshold_curve"
+    }
+  },
+  "required": [
+    "schema_version",
+    "histogram",
+    "confusion_matrix",
+    "threshold_curve"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "histogram": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "mlboard.histogram/v1"
+        },
+        "step": {
+          "$ref": "query.schema.json#/$defs/int63"
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2
+        },
+        "counts": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 1
+        },
+        "underflow": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "overflow": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sample_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "bin_semantics": {
+          "const": "left_closed_right_open_last_closed"
+        }
+      },
+      "required": [
+        "schema_version",
+        "step",
+        "edges",
+        "counts",
+        "underflow",
+        "overflow",
+        "sample_count",
+        "bin_semantics"
+      ],
+      "additionalProperties": false
+    },
+    "confusion_matrix": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "mlboard.confusion-matrix/v1"
+        },
+        "step": {
+          "$ref": "query.schema.json#/$defs/int63"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "class_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "class_id",
+              "label"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "rows": {
+          "const": "actual"
+        },
+        "columns": {
+          "const": "predicted"
+        },
+        "counts": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "sample_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "schema_version",
+        "step",
+        "labels",
+        "rows",
+        "columns",
+        "counts",
+        "sample_count"
+      ],
+      "additionalProperties": false
+    },
+    "threshold_curve": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "mlboard.threshold-curve/v1"
+        },
+        "step": {
+          "$ref": "query.schema.json#/$defs/int63"
+        },
+        "positive_class_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "averaging": {
+          "enum": [
+            "binary",
+            "micro",
+            "macro",
+            "weighted",
+            "per_class"
+          ]
+        },
+        "thresholds": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "minItems": 2
+        },
+        "threshold_state": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "finite",
+              "neg_inf",
+              "pos_inf"
+            ]
+          },
+          "minItems": 2
+        },
+        "tp": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 2
+        },
+        "fp": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 2
+        },
+        "fn": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 2
+        },
+        "tn": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 2
+        },
+        "fpr": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 2
+        },
+        "tpr": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 2
+        },
+        "precision": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 2
+        },
+        "recall": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 2
+        },
+        "undefined_rates": {
+          "const": "null"
+        },
+        "auc": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "method": {
+              "const": "trapezoid_fpr_ascending"
+            },
+            "axis": {
+              "const": "fpr_tpr"
+            }
+          },
+          "required": [
+            "value",
+            "method",
+            "axis"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "step",
+        "positive_class_id",
+        "averaging",
+        "thresholds",
+        "threshold_state",
+        "tp",
+        "fp",
+        "fn",
+        "tn",
+        "fpr",
+        "tpr",
+        "precision",
+        "recall",
+        "undefined_rates",
+        "auc"
+      ],
+      "additionalProperties": false
+    },
+    "frame_bundle": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "mlboard.native-frames/v1"
+        },
+        "frames": {
+          "type": "array",
+          "items": {
+            "$ref": "query-response.schema.json#/properties/frames/items"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "frames"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

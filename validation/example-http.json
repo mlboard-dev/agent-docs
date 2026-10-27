@@ -1,0 +1,21 @@
+{
+  "status": "passed_with_known_limitations",
+  "known_limitations": [
+    "step_downsample_elapsed_seconds_missing; raw query preserves recorded elapsed time"
+  ],
+  "server_binary_sha256": "a2a5f9f5f82055ed455e5f42fde21b0e233d88bdecc9ea543b999d7cc25ff347",
+  "schema_files": 7,
+  "query_rows": 10,
+  "mcp_tools": 10,
+  "dashboard_preview_apply": true,
+  "html_render_csp": true,
+  "not_executed": [
+    "SDK training process",
+    "browser HTML MessageChannel execution",
+    "load/performance benchmarks"
+  ],
+  "isolation": "fresh loopback-only SQLite instance; generated credentials stay in memory",
+  "temporary_instance_removed": true,
+  "http_checks": 28,
+  "source_revision": "4caeb73c2e0697158c5f376de000da3e6d523d78"
+}

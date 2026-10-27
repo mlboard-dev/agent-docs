@@ -1,0 +1,14 @@
+{
+  "schema_version": "mlboard.dashboard-change/v1",
+  "client_request_id": "agent_REPLACE_WITH_UNIQUE_ID",
+  "base_revision": "1",
+  "reason": "Resize the selected panel",
+  "operations": [
+    {
+      "op": "resize_panel",
+      "panel_id": "p_loss",
+      "w": 12,
+      "h": 16
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "panel_id": "p_html",
+  "title": "Received display points",
+  "type": "html",
+  "plugin_version": "1",
+  "query_refs": [
+    "q_loss"
+  ],
+  "options": {
+    "html": "<!doctype html><p>Replace this source with html-panel.html</p>",
+    "capabilities": [
+      {
+        "query_ref": "q_loss",
+        "fields": [
+          "run_id",
+          "x",
+          "value",
+          "value_state"
+        ],
+        "max_rows": 200
+      }
+    ]
+  }
+}

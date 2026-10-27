@@ -1,0 +1,8 @@
+{
+  "captured_on": "2026-10-27",
+  "repositories": {
+    "server": {"url": "https://github.com/mlboard-dev/server", "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78"},
+    "py-client": {"url": "https://github.com/mlboard-dev/py-client", "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761"},
+    "ios": {"url": "https://github.com/mlboard-dev/ios", "revision": "d42eab1f37a90c5d171611f57556877f62e39fda"}
+  }
+}

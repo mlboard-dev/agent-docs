@@ -1,0 +1,100 @@
+{
+  "schema_version": "mlboard.dashboard/v1",
+  "dashboard_id": "dsh_REPLACE",
+  "project_id": "prj_REPLACE",
+  "title": "Agent example",
+  "selection": {
+    "run_ids": [
+      "run_REPLACE"
+    ],
+    "run_incarnations": {
+      "run_REPLACE": "inc_REPLACE"
+    }
+  },
+  "queries": {
+    "q_loss": {
+      "schema_version": "mlboard.query/v1",
+      "runs": {
+        "run_ids": [
+          "run_REPLACE"
+        ],
+        "run_incarnations": {
+          "run_REPLACE": "inc_REPLACE"
+        }
+      },
+      "source": {
+        "kind": "scalar",
+        "metrics": [
+          {
+            "name": "train/loss",
+            "context": {}
+          }
+        ]
+      },
+      "x": {
+        "field": "step"
+      },
+      "read": {
+        "producers": {
+          "mode": "primary"
+        },
+        "sessions": {
+          "mode": "all"
+        },
+        "duplicate_steps": "latest_logical"
+      },
+      "transform": {
+        "kind": "downsample",
+        "algorithm": "min_max",
+        "algorithm_version": "1",
+        "points_per_series": 800
+      },
+      "page": {
+        "limit": 1000
+      },
+      "budget": {
+        "max_runs": 1,
+        "max_series": 1,
+        "max_points": 1000,
+        "max_points_per_series": 800,
+        "max_scanned_points": 10000000,
+        "max_bytes": 8388608,
+        "on_exceed": "error"
+      }
+    }
+  },
+  "panels": [
+    {
+      "panel_id": "p_loss",
+      "title": "Training loss",
+      "type": "timeseries",
+      "plugin_version": "1",
+      "query_refs": [
+        "q_loss"
+      ],
+      "options": {
+        "x_axis": "step",
+        "y_axis": {
+          "scale": "linear"
+        },
+        "legend": true,
+        "smoothing": {
+          "method": "none"
+        }
+      }
+    }
+  ],
+  "layout": {
+    "columns": 12,
+    "row_height": 24,
+    "items": [
+      {
+        "panel_id": "p_loss",
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 12
+      }
+    ]
+  }
+}

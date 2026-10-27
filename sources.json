@@ -1,0 +1,475 @@
+{
+  "captured_on": "2026-10-27",
+  "repositories": {
+    "server": {
+      "url": "https://github.com/mlboard-dev/server",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78"
+    },
+    "py-client": {
+      "url": "https://github.com/mlboard-dev/py-client",
+      "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761"
+    },
+    "ios": {
+      "url": "https://github.com/mlboard-dev/ios",
+      "revision": "d42eab1f37a90c5d171611f57556877f62e39fda"
+    }
+  },
+  "files": [
+    {
+      "path": "schemas/agent-change.schema.json",
+      "module": "server",
+      "source_path": "internal/server/schemas/agent-change.schema.json",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "17458e06469ceab71e08aec3e7f1981837c65d424c336e1c5d5d575f0979be0a",
+      "sha256": "17458e06469ceab71e08aec3e7f1981837c65d424c336e1c5d5d575f0979be0a",
+      "changes": []
+    },
+    {
+      "path": "schemas/chart-options.schema.json",
+      "module": "server",
+      "source_path": "internal/server/schemas/chart-options.schema.json",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "c96869d8089b4f53ec064a4efbbd7d484f1e10530a586d0a7a3a20fe21731f67",
+      "sha256": "c96869d8089b4f53ec064a4efbbd7d484f1e10530a586d0a7a3a20fe21731f67",
+      "changes": []
+    },
+    {
+      "path": "schemas/dashboard.schema.json",
+      "module": "server",
+      "source_path": "internal/server/schemas/dashboard.schema.json",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "bf1400db34e0c9dc65800c33e3a0fd28eea2d5992e0aae22347b5931cd2d0957",
+      "sha256": "bf1400db34e0c9dc65800c33e3a0fd28eea2d5992e0aae22347b5931cd2d0957",
+      "changes": []
+    },
+    {
+      "path": "schemas/native-data.schema.json",
+      "module": "server",
+      "source_path": "internal/server/schemas/native-data.schema.json",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "380fdc71bc950f41db5162c5d730fb8a06afc3b8551a3648ba96e7c0254f8d12",
+      "sha256": "380fdc71bc950f41db5162c5d730fb8a06afc3b8551a3648ba96e7c0254f8d12",
+      "changes": []
+    },
+    {
+      "path": "schemas/query-response.schema.json",
+      "module": "server",
+      "source_path": "internal/server/schemas/query-response.schema.json",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "08b37ee30b6be6627dd7c8576fc37ce9cfc74f2a5721ed32f38b84efbb84b371",
+      "sha256": "08b37ee30b6be6627dd7c8576fc37ce9cfc74f2a5721ed32f38b84efbb84b371",
+      "changes": []
+    },
+    {
+      "path": "schemas/query.schema.json",
+      "module": "server",
+      "source_path": "internal/server/schemas/query.schema.json",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "34710ac24a8d38ec3b4c5206d4227aae1f606c7c911d9db6504abaa66439847d",
+      "sha256": "34710ac24a8d38ec3b4c5206d4227aae1f606c7c911d9db6504abaa66439847d",
+      "changes": []
+    },
+    {
+      "path": "schemas/structured-data.schema.json",
+      "module": "server",
+      "source_path": "internal/server/schemas/structured-data.schema.json",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "a25820486a79224245aaae4336657eff771c8c40aa55a259886a7e39d264327a",
+      "sha256": "a25820486a79224245aaae4336657eff771c8c40aa55a259886a7e39d264327a",
+      "changes": []
+    },
+    {
+      "path": "reference/ios/README.md",
+      "module": "ios",
+      "source_path": "README.md",
+      "revision": "d42eab1f37a90c5d171611f57556877f62e39fda",
+      "source_sha256": "384afb7b71a4f6704ebd499d96edb6dce96e2066853dec6e560cc8b97e5c4d3e",
+      "sha256": "9571c11fc20340e1a999de289f05f715e417a81cf1e06494d3d6256205509028",
+      "changes": []
+    },
+    {
+      "path": "reference/ios/docs/development.md",
+      "module": "ios",
+      "source_path": "docs/development.md",
+      "revision": "d42eab1f37a90c5d171611f57556877f62e39fda",
+      "source_sha256": "7a6c235bb67016b52a5166e01138c6fb7379f67782e347acc56038cfa9ef909a",
+      "sha256": "52adc3e5014399ec13b096548121f43eaf8eaee09eebf545bf42dab4009f7d8c",
+      "changes": []
+    },
+    {
+      "path": "reference/ios/docs/following.md",
+      "module": "ios",
+      "source_path": "docs/following.md",
+      "revision": "d42eab1f37a90c5d171611f57556877f62e39fda",
+      "source_sha256": "5f7ea11c977e1654291b208c07821c518f75a8aecf28c8824ca10564183f6580",
+      "sha256": "8f9ea66931555fe821d9dc88bb459ed207126628b5cf0d740d9aee75fc9755a0",
+      "changes": []
+    },
+    {
+      "path": "reference/ios/docs/verification.md",
+      "module": "ios",
+      "source_path": "docs/verification.md",
+      "revision": "d42eab1f37a90c5d171611f57556877f62e39fda",
+      "source_sha256": "1bd1ab3a979ccdff4290260c0895f20ea407a2330575018a0a574da4e96bb746",
+      "sha256": "ef93574be89204667020e82e46076aca5e594ab59e8e7f30365d84f0035c3e3c",
+      "changes": []
+    },
+    {
+      "path": "reference/ios/docs/workflow-alignment.md",
+      "module": "ios",
+      "source_path": "docs/workflow-alignment.md",
+      "revision": "d42eab1f37a90c5d171611f57556877f62e39fda",
+      "source_sha256": "a76f0d04ef7cd43609fa1b330359510eab2b0de273a47edae156ad934e744f4e",
+      "sha256": "5f5e2375d9e639e4bfd168d9138b0fa50ee3bed80ef3f9bd0543fa6f9bf27ec4",
+      "changes": []
+    },
+    {
+      "path": "reference/py-client/README.md",
+      "module": "py-client",
+      "source_path": "README.md",
+      "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761",
+      "source_sha256": "8e2d4de8863c07e17f5311717cfeddbde1cf940bb8157dcb9124e238b1a281b0",
+      "sha256": "a968b6c5794cbf44963c3214f9736c2b9d0966919cff1fead2867852c426d278",
+      "changes": []
+    },
+    {
+      "path": "reference/py-client/docs/development-and-testing.md",
+      "module": "py-client",
+      "source_path": "docs/development-and-testing.md",
+      "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761",
+      "source_sha256": "9489b279102cac6443e1eff3d973522c4d110ec4b3490f106aee6e3f917c8b77",
+      "sha256": "ed3f97606242407c0eaa84d33383859be1e5ac0751d606302d988edadc387dcc",
+      "changes": []
+    },
+    {
+      "path": "reference/py-client/docs/local-viewer.md",
+      "module": "py-client",
+      "source_path": "docs/local-viewer.md",
+      "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761",
+      "source_sha256": "40eb00b04391c3de4906fdb3479c95ddcf509c186accca4b2b29cc5050b18769",
+      "sha256": "611272c8f3529b0cd349fbed995c9c9623ea495abd4b1d33e591ec30d45bf964",
+      "changes": []
+    },
+    {
+      "path": "reference/py-client/docs/sdk.md",
+      "module": "py-client",
+      "source_path": "docs/sdk.md",
+      "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761",
+      "source_sha256": "00c1deec2b4c33844b5c24611f12da5158078aa92f2b42b5df979aea86fbe4cb",
+      "sha256": "b54011425e81c5b02f9abbcc4e0bd6e932b084921ebe14720e4fac1e0845dc62",
+      "changes": []
+    },
+    {
+      "path": "reference/py-client/docs/storage-and-recovery.md",
+      "module": "py-client",
+      "source_path": "docs/storage-and-recovery.md",
+      "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761",
+      "source_sha256": "9c7d4b28fbfddb5123db48fc6645c1fff8f47a2958caaffada8de287a3a2fb17",
+      "sha256": "184528b93b4192b831702843a1d3a88e136e1b5551b64bd4e7c084da6d5cf266",
+      "changes": []
+    },
+    {
+      "path": "reference/py-client/docs/sync-and-keys.md",
+      "module": "py-client",
+      "source_path": "docs/sync-and-keys.md",
+      "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761",
+      "source_sha256": "80d3eb878e4fe0316d4c44a8c5d445ede5d62f64e7a8daad1515eff7f1739df9",
+      "sha256": "ba5a9788eee09fbce7762b8f7326be1b4271fe3640de738273f1341f71ef0860",
+      "changes": []
+    },
+    {
+      "path": "reference/py-client/docs/tensorboard.md",
+      "module": "py-client",
+      "source_path": "docs/tensorboard.md",
+      "revision": "9f27e9de3d37b61a0276c71aec0e514d88759761",
+      "source_sha256": "fe9349c024f8cc77569088523adc6ed10cdc2512664dfadf84b78073db61fc57",
+      "sha256": "30063bd800875907ee936a8be8e1efccf825b76c6714236c61b44462aad19045",
+      "changes": []
+    },
+    {
+      "path": "reference/server/CONTRACT.md",
+      "module": "server",
+      "source_path": "CONTRACT.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "1e74fe05b103ec7125eb2f1944aae0377cae5851af39b32f381eb75f5a98e324",
+      "sha256": "acc4538f1db4719cdafb1cf36ecc9e5345d9a911108b376475806ad233ed42e4",
+      "changes": []
+    },
+    {
+      "path": "reference/server/README.md",
+      "module": "server",
+      "source_path": "README.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "435dac8c9fda97e8df9ad05b6837bcae133c954bb1bef95758657e9b002c8f23",
+      "sha256": "1745b8f87c345cb302320498da44e9f267ef49c5fde8e8014ee5a5077ade3754",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/admin.md",
+      "module": "server",
+      "source_path": "docs/admin.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "0561371d2bf1f0646cf2b1beaf1cbd91a7540e46a605894795396f328833186d",
+      "sha256": "5cb805543dc7be80c69490ec279f40a635d213b278e966d936d55176d7685f3e",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/agent-dashboards.md",
+      "module": "server",
+      "source_path": "docs/agent-dashboards.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "9768febce4326b822318fc22921c10da2ed989c0f7b98d9f192921e0c67cf892",
+      "sha256": "9be78f4cac0a90dd65c93c9c8b4a93174bbf16f08abd5821f2a19af7c76e8046",
+      "changes": [
+        {
+          "kind": "erratum",
+          "reason": "与上游本文末尾的个人方案权限及当前后端实现保持一致。"
+        }
+      ]
+    },
+    {
+      "path": "reference/server/docs/api-contract.md",
+      "module": "server",
+      "source_path": "docs/api-contract.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "659d33c348b46134aafa5d761e6f04354c0c338e42d38f76b367285147e5f6c4",
+      "sha256": "0184d3a4ace34a3b1254b46ae1bd87cb2e0b81c74e475b773c669ccaf75fb32d",
+      "changes": [
+        {
+          "kind": "erratum",
+          "reason": "上游这一句仍是旧上限；按同提交 capabilities.go、query.schema.json 和 docs/query-performance.md 校正。"
+        },
+        {
+          "kind": "erratum",
+          "reason": "生产 query schema 的 transform.kind 为 raw 或 downsample；none 不是当前 wire 值。"
+        }
+      ]
+    },
+    {
+      "path": "reference/server/docs/apns.md",
+      "module": "server",
+      "source_path": "docs/apns.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "05ae709d8056ff34dc65cfc4844063ea0a6c41ff7a0a5731c722b5357d4cede3",
+      "sha256": "3a2c4406d472d9e9b96f3a4488eee5f2e244358015b4cccafd5044fb66bec54e",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/canonical-step-stream.md",
+      "module": "server",
+      "source_path": "docs/canonical-step-stream.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "b45745aedcaec044f7d4f83ac80bdee661b98cb00e4151fa70a2a65a698f36b4",
+      "sha256": "48cf0be93357a438e44bbc23333e148e9648ba42f8c92df68e1cf6d540491b21",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/charts.md",
+      "module": "server",
+      "source_path": "docs/charts.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "f50a448293b46ab12c529183e4eec89bf1060e2dea0a93961af773edb972ac19",
+      "sha256": "99d128d1e182b158b01beee347fb082063f8825f02a9637d530e298f3b3692bc",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/configuration.md",
+      "module": "server",
+      "source_path": "docs/configuration.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "1a2f20593346046a1ef143e7990c5068fd16d0d992ac17e1f80daff742f2e684",
+      "sha256": "ff715cb1fec16ac01ffc86db619959caba5bbca451ad880043121af369eee32d",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/cross-compilation.md",
+      "module": "server",
+      "source_path": "docs/cross-compilation.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "3f1d71242e03afd942818ddc13ab28446b8fe7f40b6d4b7cd99ac46d21e9c428",
+      "sha256": "6d52847596f9d535964a738c30ba9c26cb60668a04e2736691d640b02895bda1",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/demo-data.md",
+      "module": "server",
+      "source_path": "docs/demo-data.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "981e38b8ce91dd2f9834634b6af630c942fed28daa148c38d15cea30fe379677",
+      "sha256": "9d98305564b79f80b34c809c2d185d7ec223a892422f8bb73d3d7185aba5d10c",
+      "changes": [
+        {
+          "kind": "generic-example",
+          "replacement": "/path/to/mlboard"
+        }
+      ]
+    },
+    {
+      "path": "reference/server/docs/deployment.md",
+      "module": "server",
+      "source_path": "docs/deployment.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "18e4fa0009a24d8ba4b962ef6baaafde61169d022eb34927173269e063c96943",
+      "sha256": "85ac582b8b2f4bf51d800340dad89edd4e610f30d9772361985e32e54dc9aebf",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/following.md",
+      "module": "server",
+      "source_path": "docs/following.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "a4c29bff434caa0a6b550325781b2271c53923ec887542d9c80d76b4c490c30d",
+      "sha256": "e7a2c7dee8070abfe83840adf32018ae1091e5501c1485145658e0cc79e86a06",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/frontend-analysis-continuity.md",
+      "module": "server",
+      "source_path": "docs/frontend-analysis-continuity.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "5b5cb68e3483595718d7519c644ba65da3215ed74d44c9656741cd366f383e7a",
+      "sha256": "b6e3dbffac93a37ff192113aa145252aa1446b98197ca96c4ac4dac79e2d3f18",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/history-point-query-plan.md",
+      "module": "server",
+      "source_path": "docs/history-point-query-plan.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "416c9b81d7111723b18a3054f7c4f8a5640fce2fd4c26bc9ece7fab355fe27f3",
+      "sha256": "987683c826970f34db0f50f694a611cdf3a23293cc16f1706cb770aad81a4cb2",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/i18n.md",
+      "module": "server",
+      "source_path": "docs/i18n.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "6e17846b45f2d73485e0a4415176e0940df2c8b9aaf76e09a6dfb2c2255ed0ee",
+      "sha256": "1d2151e5ed17afa072d6b7afb692e102be44c9d4b8588d178a2f36a3d3cf440c",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/lan-and-proxy.md",
+      "module": "server",
+      "source_path": "docs/lan-and-proxy.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "82e10210d807534b825eed1ba97096ce16d56c5c6105c57ce732c2c111d1a2db",
+      "sha256": "01a882e0a7deeb389aab102c0bbbee7d19973ac6c122c4c8f2cfd2bdbede8005",
+      "changes": [
+        {
+          "kind": "generic-example",
+          "replacement": "192.168.1.10"
+        }
+      ]
+    },
+    {
+      "path": "reference/server/docs/mobile-api.md",
+      "module": "server",
+      "source_path": "docs/mobile-api.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "7b279f451c5ab124e3786cdd889b1d6915bd727547bcebd5d0dde5d763eaaac8",
+      "sha256": "a0268e7d6c6e4750848523410dc46f785a5bdc92fb973d9fce13c9614a346cfb",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/organizations.md",
+      "module": "server",
+      "source_path": "docs/organizations.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "ac84e95b2f52597b48405821f45914b48fd3cc01f2de9eb320556a5b9810bcc4",
+      "sha256": "643fc135e78a9a4f5efcd7bdef2c7120d25654e743d0770827806a91fbdb28c5",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/performance.md",
+      "module": "server",
+      "source_path": "docs/performance.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "bd015854ade1cf249a7183fade48e579ddc82f71eaaf8855e314a3f2d441dac1",
+      "sha256": "e927df6356238179c0076e18fe0a32c47a93f0d5059ce80bd96e3004b5a280dd",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/query-frame-reuse.md",
+      "module": "server",
+      "source_path": "docs/query-frame-reuse.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "a8b249210e4652ad96dfe5c680cf7df80ca14f04bfd3b81b7102800b47be69d5",
+      "sha256": "a1df9e32f3c5e4b846c34e0635ad8a59ccb2d0075f6fbc3957adf59511847513",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/query-performance.md",
+      "module": "server",
+      "source_path": "docs/query-performance.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "220e1ecb80c157065c328f592c66e1de32d7be3bc1269d7a916f09a0dd8a009e",
+      "sha256": "3879006a8c054867509c4247f91272e0576ef12612b61b77a229241de24d367f",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/realtime-cluster.md",
+      "module": "server",
+      "source_path": "docs/realtime-cluster.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "f647dbeb0f7a87c0eb0d619382300b58cf43df32d304d40520d47e8328735e20",
+      "sha256": "c3d252e324feca056cf10f34606dd7ca906af56ccb5ea056dcd6e2e05dbf8089",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/request-boundaries.md",
+      "module": "server",
+      "source_path": "docs/request-boundaries.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "e0d989db64186e3495348d196f5849fd69f189df9054a30793878ff23c410b67",
+      "sha256": "672e500cc8138272cc865771e25162a6b93ae630cbdc0da85844f92c0f2c4c59",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/setup.md",
+      "module": "server",
+      "source_path": "docs/setup.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "1db4ea0b92b0ba1792c12d5452b2a71de80efd2663c1920dd4423602a61bc10b",
+      "sha256": "680fc40d0ba3d2369d446909fae559552f01279e3a8e767da493db52788f81c8",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/storage.md",
+      "module": "server",
+      "source_path": "docs/storage.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "95fec7d1cd03067e010dc31daa26b71d0ae8b6500175a0a6a6e11c6d9419b34a",
+      "sha256": "7275808a8440cf2ed13d64085305cead8af582baa3b6abb4358649bee01a15e2",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/summary-projection.md",
+      "module": "server",
+      "source_path": "docs/summary-projection.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "bc9c6e001118e57e89169d91add835c6cd40fab6c065acf079fa396dec8dd8dd",
+      "sha256": "d566fc479a0b99f116f828799372555fa8ba61397f5c14c86162b1b0b1b556c0",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/web-workflows-v3.md",
+      "module": "server",
+      "source_path": "docs/web-workflows-v3.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "e591e9d513a54d4b9e5a58485c6a32432fca5f8eb59c015fb3e55fbb63ed6b4b",
+      "sha256": "9516a2c7b0c04c87376f79884540c34d38715f23bc1141aafe3e2bee5a42183c",
+      "changes": []
+    },
+    {
+      "path": "reference/server/docs/web.md",
+      "module": "server",
+      "source_path": "docs/web.md",
+      "revision": "4caeb73c2e0697158c5f376de000da3e6d523d78",
+      "source_sha256": "f6ed95e7858253532f5f9bed59f82044536363203ff41f2fdcc0dca49f5bc88d",
+      "sha256": "df291bcb340b808309398ed4aa0624d320b34bedcda25176e69d7f8bbc33be3a",
+      "changes": []
+    }
+  ]
+}
