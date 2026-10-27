@@ -1,4 +1,4 @@
-> 来源：[server/docs/api-contract.md](https://github.com/mlboard-dev/server/blob/4caeb73c2e0697158c5f376de000da3e6d523d78/docs/api-contract.md) · `4caeb73`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
+> 来源：[server/docs/api-contract.md](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/docs/api-contract.md) · `73643d8`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
 
 # MLBoard implementation contract v0.1
 
@@ -9,6 +9,7 @@ Shared implementation boundary for server, Web and Python client. Coordinate cha
 - Go module `mlboard/server`; module minimum Go 1.26, verified toolchain 1.27.3. SQLite default, `--database sqlite --dsn <path>`; PostgreSQL via `--database postgres --dsn <postgres URL>`. Default listen `127.0.0.1:8080`; configurable `--data-dir`, `--web-dir`. Built web served same origin. Health `/healthz`, readiness `/readyz`.
 - `web/`: React + TypeScript + Vite + ECharts. Routes client-side; API prefix `/api/v1`. Vite dev proxy to 8080. Credentials cookie; bearer keys for client/agent. JSON errors `{error:{code,message,details?,retryable},request_id}`. IDs strings, int63 revisions/step/seq strings. Times RFC3339 UTC.
 - Auth mutation cookie requests must check Origin and CSRF. Login/setup returns `{user,csrf_token}`; GET `/auth/me` returns same; web sends `X-CSRF-Token`. Bearer requests do not require CSRF. All user content is untrusted.
+- Before authentication, `strict` Host validation (default) requires the configured public authority. `MLBOARD_HOST_VALIDATION=relaxed` / `--host-validation relaxed` accepts well-formed Host aliases for SDK/Agent calls. It does not relax authentication, scopes, organization/project ACL, browser Origin/CSRF, trusted-proxy rules or the configured OAuth/public-link base. See [LAN and proxy configuration](lan-and-proxy.md).
 
 ## Authentication and instance
 

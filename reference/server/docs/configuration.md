@@ -1,4 +1,4 @@
-> 来源：[server/docs/configuration.md](https://github.com/mlboard-dev/server/blob/4caeb73c2e0697158c5f376de000da3e6d523d78/docs/configuration.md) · `4caeb73`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
+> 来源：[server/docs/configuration.md](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/docs/configuration.md) · `73643d8`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
 
 # 配置来源与生效时间
 
@@ -14,6 +14,7 @@
 | `SQLITE_TMPDIR` | SQLite 专用临时文件目录，必须是绝对路径；未设置时保留 SQLite 的默认目录选择 |
 | `MLBOARD_DATA_DIR` | `--data-dir`；二进制默认 `outputs/data`，Compose 为 `/data/files` |
 | `MLBOARD_PUBLIC_URL` | `--public-url`；未设置时从监听地址派生，wildcard host 转为 `127.0.0.1` |
+| `MLBOARD_HOST_VALIDATION` | `--host-validation`；`strict`（默认）要求 Host 与 public URL 一致；`relaxed` 接受合法 Host 别名，仍执行账号/项目权限和 Origin/CSRF 校验；非法模式启动失败 |
 | `MLBOARD_TRUSTED_PROXIES` | `--trusted-proxies`；逗号分隔的实际代理 IP CIDR，默认空，转发地址不受信任；只解析 `X-Forwarded-For` |
 | `MLBOARD_READ_TIMEOUT_SECONDS` | `--read-timeout`；数据读取默认及查询执行上限，默认 60 秒，范围 1..600 秒 |
 | `MLBOARD_READ_RECHECK_SECONDS` | `--read-recheck-timeout`；分享预览独立最终权限复核，默认 10 秒，范围 1..120 秒 |
@@ -48,7 +49,9 @@ JSON body 接收与响应写出各自有限：先完成接收，再执行数据�
 
 SSE/WebSocket URL 上的认证、权限、游标或握手拒绝仍受有限响应写时限约束。成功的 SSE 响应及已升级的 WebSocket 使用流自身的写策略；WebSocket 握手写出另受 `MLBOARD_RESPONSE_WRITE_SECONDS` 约束，完成后清除该握手时限。
 
-Compose 将容器监听地址固定为 `0.0.0.0:8080`，通过 `MLBOARD_PORT` 配置宿主机端口。留空 `MLBOARD_PUBLIC_URL` 时，Compose 自动生成 `http://127.0.0.1:<MLBOARD_PORT>`；显式公网 URL 优先。`MLBOARD_BIND_ADDRESS` 默认 `127.0.0.1`，对外入口须与 public URL 的 Host/端口一致。Host/Origin 检查始终生效；HTTPS public URL 同时启用 Secure cookie。
+Compose 将容器监听地址固定为 `0.0.0.0:8080`，通过 `MLBOARD_PORT` 配置宿主机端口。留空 `MLBOARD_PUBLIC_URL` 时，Compose 自动生成 `http://127.0.0.1:<MLBOARD_PORT>`；显式公网 URL 优先。`MLBOARD_BIND_ADDRESS` 默认 `127.0.0.1`。strict 模式要求入口 Host/端口与 public URL 一致；可显式设置 `MLBOARD_HOST_VALIDATION=relaxed` 让 SDK/Agent 通过其他地址携带 Bearer key 访问。该选项是重启生效的运行配置，CLI 优先于环境变量。修改 Compose `.env` 后需 `docker compose ... up -d --force-recreate` 重新传入容器，单纯 restart 不更新环境。
+
+relaxed 仅解除 Host 与 public URL 的相等约束，仍拒绝非法 Host 格式；不允许 `X-Forwarded-Host` 或 `X-Forwarded-Proto` 改写 canonical URL。浏览器 Origin/CSRF、认证、key scopes、组织/项目 ACL、OAuth 回调、生成的链接和 Secure cookie 策略保持以 `MLBOARD_PUBLIC_URL` 为准。浏览器换域名登录/写入应使用配置的 public origin；SDK/Agent 的 Bearer 调用通常不发送 Origin。HTTPS public URL 仍启用 Secure cookie。
 
 SQLite Compose 将 `SQLITE_TMPDIR` 固定为数据卷中的 `/data/files/sqlite-tmp`，避免大型排序耗尽 `/tmp` 的小型 tmpfs。启动时由运行用户创建缺少的目录并检查临时文件写入、关闭与删除；目录不可用会阻止启动。临时文件占用该卷的磁盘空间和 I/O，目录配置须在进程启动前固定，不在连接之间切换；PostgreSQL 忽略此项。
 

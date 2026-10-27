@@ -4,7 +4,7 @@
 
 | 模块 | 固定提交 |
 |---|---|
-| server | [`4caeb73`](https://github.com/mlboard-dev/server/tree/4caeb73c2e0697158c5f376de000da3e6d523d78) |
+| server | [`73643d8`](https://github.com/mlboard-dev/server/tree/73643d862b4d6d930e6cfd41bb68acd949ed22df) |
 | py-client | [`9f27e9d`](https://github.com/mlboard-dev/py-client/tree/9f27e9de3d37b61a0276c71aec0e514d88759761) |
 | ios | [`d42eab1`](https://github.com/mlboard-dev/ios/tree/d42eab1f37a90c5d171611f57556877f62e39fda) |
 
