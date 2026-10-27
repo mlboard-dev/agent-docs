@@ -5,6 +5,8 @@
 1. 在项目中打开“接入实验”或账号的“API 密钥”，创建覆盖任务的项目 key。训练 key 不自动具有 Dashboard / HTML 权限。
 2. 把实例地址配置为 `MLBOARD_SERVER`，将 key 通过秘密管理注入 `MLBOARD_API_KEY`。本仓库示例另外使用 `MLBOARD_PROJECT_ID`、`MLBOARD_RUN_ID`、`MLBOARD_DASHBOARD_ID` 作为任务参数。
 3. 先读 `/api/v1/capabilities`、`/registry`、`/schemas`。REST 数据接口使用 `Authorization: Bearer <key>`，MCP 使用相同 key。
+遇到鉴权前的`untrusted_host`时，检查[Host模式与反代配置](deployment.md)。宽松Host不会跳过API key权限。
+
 4. 用 `GET /api/v1/projects` 核对项目可见性，再按 [训练接入](training.md)、[数据查询](querying.md) 或 [分析方案](dashboards.md) 操作。
 
 安装 SDK 用 [py-client 源码仓库](https://github.com/mlboard-dev/py-client) 的已检查版本，安装到自己的虚拟环境。不要假设包已经发布到 PyPI。源码仓库为 Private，克隆需要获授权的 GitHub 账号。

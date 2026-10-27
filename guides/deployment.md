@@ -3,6 +3,7 @@
 使用 [部署手册](../reference/server/docs/deployment.md) 中的独立二进制或Compose模板，源码链接固定到文档基线。Docker Hub目前的beta标签为 `syx0310/mlboard:beta`；标签可变，部署时记录实际digest和平台。
 
 - 服务端支持SQLite或PostgreSQL，附件支持local/S3。Valkey是可选共享缓存，不是权限或持久摄取的替代品。
+- SDK/Agent使用额外LAN IP、容器名或代理地址遇到`403 untrusted_host`时，可在服务端配置`MLBOARD_HOST_VALIDATION=relaxed`（CLI为`--host-validation relaxed`）。默认strict；Compose修改环境后需`up -d --force-recreate`。仅放宽Host别名，认证、权限、浏览器Origin/CSRF仍保留；浏览器仍使用canonical public URL。
 - 设置公开访问地址MLBOARD_PUBLIC_URL；LAN IP与反代场景参考 [LAN/反代](../reference/server/docs/lan-and-proxy.md)。示例地址和路径已泛化，不对应可直接访问的实例。
 - HTTPS、代理源地址、SSE/WebSocket转发和读取期限需要与实际入口匹配。只信任配置的代理CIDR，不盲目信任客户端X-Forwarded-For。
 - 用户修改实例设置后，持久设置优先于首次启动环境变量。读取期限、查询预算与上传/下载预算分别处理。

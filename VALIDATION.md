@@ -1,6 +1,6 @@
 # 文档验证
 
-2026-10-27，基线版本见[source-lock.json](source-lock.json)。这是文档和示例验收，不是产品压测。
+2026-10-27，当前文档基线见[source-lock.json](source-lock.json)。下述28项HTTP示例验收对应`4caeb73`；Host模式文档更新至`73643d8`，产品Host/CLI/权限回归由服务端发布验证覆盖，本文不把旧HTTP示例记录当作新版本重跑结果。这是文档和示例验收，不是产品压测。
 
 - 41份正式模块文档/入口按三个固定Git提交同步，保留原文与整理后SHA；7份生产schema逐字节同步。
 - 离线检查相对链接、JSON语法、schema内部引用、Python AST与HTML内联JavaScript语法，结果见[离线记录](validation/docs-check.json)。

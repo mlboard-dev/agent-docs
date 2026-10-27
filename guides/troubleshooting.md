@@ -3,6 +3,7 @@
 | 现象 | 先核对 |
 |---|---|
 | 项目/组织看不到，404 | 账号是否仍是组织及项目成员；ID是否真实；key范围是否覆盖。管理员不自动跨组织。 |
+| 403 untrusted_host（鉴权前） | 核对MLBOARD_PUBLIC_URL与调用地址；需要允许SDK/Agent别名时，在服务端设置MLBOARD_HOST_VALIDATION=relaxed并重建容器。不要通过伪造Origin/改凭据处理Host错误。 |
 | 403 | scope、项目/方案权限；cookie写入还需正确Origin/CSRF。不要反复猜ID。 |
 | 412 | 版本已改变；重新读revision/etag并重建preview。 |
 | 410或快照失效 | 从第一页重新查询，不能混接不同snapshot。 |

@@ -3,7 +3,7 @@
 先读 README 的任务索引，只加载相关指南。reference 是固定版本的正式模块文档；来源与勘误在 SOURCES.md。此仓库帮助你使用产品，不赋予任何账号或项目权限。
 
 1. 从用户提供的实例地址和凭据开始。读取 capabilities、registry、schemas，再通过 API 发现真实项目、Run、series 和 Dashboard ID；不要猜名称、ID、指标 context 或字段。
-2. 使用账号在组织/项目内的真实权限与所需 key scopes。普通账号可在登录界面创建组织；实例管理员访问已有组织也必须先加入。API key 不提供组织治理权限。
+2. 使用账号在组织/项目内的真实权限与所需 key scopes。普通账号登录后可创建组织；实例管理员访问已有组织也必须先加入。API key 不提供组织治理权限。
 3. 列表导航优先 include_summary=false，按 cursor 读取需要的页。指标分析按需请求精确摘要。不要把空 metadata summary 当作实验没有指标。
 4. 保留原始 X 轴、context、Run incarnation 和十进制整数字符串。Step 只是可选轴之一。缺失值/NaN 保持缺失，不补零；采样数据的极值不自动等于全历史最佳。
 5. 编辑分析方案先读 spec/revision/etag，再 preview、检查 diff、apply、读回确认。按本次用户授权操作；preview 本身不是强制人工审批。412 时重新读取和重建变更，不强行覆盖别人修改。
