@@ -1,4 +1,4 @@
-> 来源：[server/docs/lan-and-proxy.md](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/docs/lan-and-proxy.md) · `73643d8`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
+> 来源：[server/docs/lan-and-proxy.md](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/docs/lan-and-proxy.md) · `15f9b75`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
 
 # 局域网与反向代理
 
@@ -29,8 +29,8 @@ MLBOARD_HOST_VALIDATION=relaxed
 
 先配置域名与 TLS，再将 `MLBOARD_PUBLIC_URL` 改为最终 HTTPS origin（例如 `https://board.example.com`），应用只监听 loopback 或私有容器网络。HTTPS public URL 会自动启用 Secure cookie。API、Web 静态资源、SSE、WebSocket、分享链接和文件下载均保持原路径；当前不支持把整个应用挂在 `/mlboard/` 子路径。
 
-- [Caddy 样本](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/reverse-proxy/Caddyfile.example)：自动 TLS、即时 SSE flush，原生转发 WebSocket。
-- [Nginx 样本](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/reverse-proxy/nginx.conf.example)：保留原 Host，显式 Upgrade、关闭响应缓冲与代理缓存。上传上限可按应用与部署预算调整，不能只改代理绕过应用限制。
+- [Caddy 样本](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/reverse-proxy/Caddyfile.example)：自动 TLS、即时 SSE flush，原生转发 WebSocket。
+- [Nginx 样本](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/reverse-proxy/nginx.conf.example)：保留原 Host，显式 Upgrade、关闭响应缓冲与代理缓存。上传上限可按应用与部署预算调整，不能只改代理绕过应用限制。
 
 `MLBOARD_TRUSTED_PROXIES` 仅控制客户端 IP 的 `X-Forwarded-For` 信任；不会让任意 `X-Forwarded-Host`／`X-Forwarded-Proto` 覆盖 public URL。只填写实际代理的单个 IP/CIDR，例如 loopback 代理 `127.0.0.1/32,::1/128`，不要填写所有网段。代理覆盖外部传入的转发头；若还有上一层负载均衡，应明确每一跳的信任边界。不要把 Origin 校验去掉来修复部署地址不匹配。
 
@@ -46,8 +46,8 @@ MLBOARD_HOST_VALIDATION=relaxed
 
 demo 启动器读取专属 `settings.json` 的 `host_validation`（缺省 strict），写入应用容器环境并记录部署状态；只改变此设置也会重新部署。恢复中断发布时，核验待发布容器记录的模式，避免用后来改变的设置误判已有候选。
 
-[LAN demo workflow](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/.github/workflows/demo.yml) 只在私有 `mlboard-dev/server` 的 `main` push 或手动触发时运行，使用该仓库专属 `mlboard-demo-x86` runner。checkout token 仅有 `contents: read`，不持久化。部署密钥受组织策略禁止时无需放宽策略，也无需在主机存储个人 PAT。
+[LAN demo workflow](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/.github/workflows/demo.yml) 只在私有 `mlboard-dev/server` 的 `main` push 或手动触发时运行，使用该仓库专属 `mlboard-demo-x86` runner。checkout token 仅有 `contents: read`，不持久化。部署密钥受组织策略禁止时无需放宽策略，也无需在主机存储个人 PAT。
 
-[部署脚本](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/demo/deploy.py) 先核对 commit、构建固定基础镜像并运行 Web/Go 检查，再短暂停止旧进程、完整复制数据库及附件到新数据目录。候选仅开放 loopback，在副本上迁移并检查登录／查询／流式接口后，才切换 Caddy 的 LAN 入口。候选失败时重启原进程，原数据库不受候选迁移影响。开始对外开放新数据库后，不自动恢复旧数据库丢弃已确认写入；持久化发布日志和定时 recovery 会继续完成新版本。
+[部署脚本](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/demo/deploy.py) 先核对 commit、构建固定基础镜像并运行 Web/Go 检查，再短暂停止旧进程、完整复制数据库及附件到新数据目录。候选仅开放 loopback，在副本上迁移并检查登录／查询／流式接口后，才切换 Caddy 的 LAN 入口。候选失败时重启原进程，原数据库不受候选迁移影响。开始对外开放新数据库后，不自动恢复旧数据库丢弃已确认写入；持久化发布日志和定时 recovery 会继续完成新版本。
 
 应用与代理由 Docker `restart: unless-stopped` 常驻。runner 的项目专用监督脚本通过 crontab 每两分钟确认进程与待恢复发布，机器重启后恢复；它不定时重新部署相同版本。构建／检查失败及剩余空间低于 8 GiB 时保留当前版本，错误保存在 `demo-live/logs/`。数据目录及 `credentials.json` 为私有，密码变化后需同步更新该文件才能通过后续登录验收。此服务是开发预览，不把生产数据导入演示实例。

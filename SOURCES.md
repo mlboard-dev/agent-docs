@@ -1,10 +1,10 @@
 # 来源与更新
 
-快照日期：2026-10-27。来源均为已发布的私有模块仓库。
+快照日期：2026-10-28。来源均为已发布的私有模块仓库。
 
 | 模块 | 固定提交 |
 |---|---|
-| server | [`73643d8`](https://github.com/mlboard-dev/server/tree/73643d862b4d6d930e6cfd41bb68acd949ed22df) |
+| server | [`15f9b75`](https://github.com/mlboard-dev/server/tree/15f9b7577ce00934246e1e0b7ae219809b1b1590) |
 | py-client | [`9f27e9d`](https://github.com/mlboard-dev/py-client/tree/9f27e9de3d37b61a0276c71aec0e514d88759761) |
 | ios | [`d42eab1`](https://github.com/mlboard-dev/ios/tree/d42eab1f37a90c5d171611f57556877f62e39fda) |
 

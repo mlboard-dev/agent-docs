@@ -686,6 +686,27 @@
                   },
                   "pinned": {
                     "type": "boolean"
+                  },
+                  "size": {
+                    "type": "object",
+                    "description": "Optional per-panel dimensions in CSS pixels. Height is the base card height before additional legend space; omission uses the global display dimensions.",
+                    "properties": {
+                      "width": {
+                        "type": "integer",
+                        "minimum": 240,
+                        "maximum": 1600
+                      },
+                      "height": {
+                        "type": "integer",
+                        "minimum": 240,
+                        "maximum": 1000
+                      }
+                    },
+                    "required": [
+                      "width",
+                      "height"
+                    ],
+                    "additionalProperties": false
                   }
                 },
                 "required": [

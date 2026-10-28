@@ -18,4 +18,6 @@ preview10分钟有效并绑定当前用户；412重新读取和生成预览，�
 
 布局为12列网格，最终卡片不能重叠；多次移动可放在同一变更中验证终态。共享query的修改会影响所有引用面板；只改一图的轴时复制query并更新query_refs。Run/配置/表格字段建议使用FieldRef，参见 [字段身份](../reference/server/docs/frontend-analysis-continuity.md)。
 
+单卡拖拽尺寸保存在 `view.presentation.panels[panel_id].size`，对象必须同时有整数 `width`（240–1600）和 `height`（240–1000），单位 CSS px。height 不包含展开图例增加的高度。先确认目标实例 schema 支持该字段，再在完整原 view 中修改它；可通过 `set_view` 预览/应用，保留其他面板与展示字段。此覆盖优先于基础自动/网格尺寸；显式 `resize_panel` 会清除目标卡片的覆盖，`move_panel` 保留。浏览器临时拖拽只有保存方案后才成为持久定义。
+
 [完整 Agent 编辑说明](../reference/server/docs/agent-dashboards.md) · [Dashboard schema](../schemas/dashboard.schema.json) · [变更 schema](../schemas/agent-change.schema.json) · [图表类型](../reference/server/docs/charts.md)

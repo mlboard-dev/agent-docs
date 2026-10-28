@@ -1,4 +1,4 @@
-> 来源：[server/docs/deployment.md](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/docs/deployment.md) · `73643d8`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
+> 来源：[server/docs/deployment.md](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/docs/deployment.md) · `15f9b75`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
 
 # 部署 MLBoard Server
 
@@ -43,7 +43,7 @@ Web 源码构建后嵌入二进制；之后运行只需二进制、数据及部�
 
 ## 2. 最简 Docker Compose：一个应用容器
 
-完整文件：[deploy/compose.local.yml](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/compose.local.yml)。使用 SQLite + local，不需要外部服务。
+完整文件：[deploy/compose.local.yml](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/compose.local.yml)。使用 SQLite + local，不需要外部服务。
 
 以下示例固定项目名 `mlboard`。首次部署多实例时，为每个实例选不同的 `-p`；同一实例的启动、更新、exec 和停机始终沿用原名。已有部署应使用 `docker compose ls` 中现有的项目名，改名会选择另一组数据卷。
 
@@ -80,7 +80,7 @@ volumes:
 
 ## 2.1 PostgreSQL + 本地文件
 
-需要 PostgreSQL、文件仍保存在应用卷时，使用 [deploy/compose.postgres.yml](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/compose.postgres.yml)。只需设置 `MLBOARD_POSTGRES_PASSWORD`，无需 RustFS 凭据：
+需要 PostgreSQL、文件仍保存在应用卷时，使用 [deploy/compose.postgres.yml](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/compose.postgres.yml)。只需设置 `MLBOARD_POSTGRES_PASSWORD`，无需 RustFS 凭据：
 
 ```sh
 docker compose -p mlboard --env-file deploy/.env -f deploy/compose.postgres.yml up --build -d
@@ -90,7 +90,7 @@ docker compose -p mlboard --env-file deploy/.env -f deploy/compose.postgres.yml 
 
 ## 3. 完整 Docker Compose：PostgreSQL + RustFS
 
-完整文件：[deploy/compose.full.yml](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/compose.full.yml)，三项服务均在同一 Compose 网络。应用通过 `http://rustfs:9000` 读写 S3；数据库和 S3 API 端口不发布到宿主机。
+完整文件：[deploy/compose.full.yml](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/compose.full.yml)，三项服务均在同一 Compose 网络。应用通过 `http://rustfs:9000` 读写 S3；数据库和 S3 API 端口不发布到宿主机。
 
 ```sh
 cp deploy/.env.example deploy/.env
@@ -130,11 +130,11 @@ curl --fail http://127.0.0.1:8080/readyz
 | `rustfs-data` | 上传对象及 RustFS 自身元数据 |
 | `mlboard-files` | settings.key、上传暂存及切换前的 local 历史文件 |
 
-`docker compose down` 保留卷；`down -v` 会删除对应实例的数据，不用于正常重启。更新程序使用 `up --build -d`，不要删除卷。应用构建只使用此仓库的 `deploy/Dockerfile`；基础镜像及 RustFS/PostgreSQL 均固定 digest，唯一记录见 [images.lock.json](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/images.lock.json)。这套样本是单机部署，RustFS 仅一个数据卷，不提供多节点容灾。
+`docker compose down` 保留卷；`down -v` 会删除对应实例的数据，不用于正常重启。更新程序使用 `up --build -d`，不要删除卷。应用构建只使用此仓库的 `deploy/Dockerfile`；基础镜像及 RustFS/PostgreSQL 均固定 digest，唯一记录见 [images.lock.json](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/images.lock.json)。这套样本是单机部署，RustFS 仅一个数据卷，不提供多节点容灾。
 
 ## 3.1 可选 Valkey 共享查询缓存
 
-默认仅有 L1，无需额外服务。需要进程重启或多应用进程间复用相同版本的查询结果时，优先叠加 [deploy/compose.valkey.yml](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/compose.valkey.yml)，可用于 local、postgres 或 full 任一入口。沿用该实例已有的项目名和 `.env`，用 `openssl rand -hex 24` 生成独立口令，填入 `VALKEY_PASSWORD`，并将 `.env` 权限设为 0600。使用 hex 避免口令中的 URL 保留字符；不要复用数据库或 S3 凭据。
+默认仅有 L1，无需额外服务。需要进程重启或多应用进程间复用相同版本的查询结果时，优先叠加 [deploy/compose.valkey.yml](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/compose.valkey.yml)，可用于 local、postgres 或 full 任一入口。沿用该实例已有的项目名和 `.env`，用 `openssl rand -hex 24` 生成独立口令，填入 `VALKEY_PASSWORD`，并将 `.env` 权限设为 0600。使用 hex 避免口令中的 URL 保留字符；不要复用数据库或 S3 凭据。
 
 ```sh
 # deploy/.env 中设置 VALKEY_PASSWORD=<生成的48位hex>，保留其他原有配置。
@@ -224,7 +224,7 @@ PostgreSQL 使用相同命令，改为目标库的 `--database postgres` 和 DSN
 
 ## 7. 可选 APNs
 
-默认 `MLBOARD_APNS_ENABLED=false`，无需私钥或 secret。启用前在 `.env` 中填写 `MLBOARD_APNS_TEAM_ID`、`MLBOARD_APNS_KEY_ID`、`MLBOARD_APNS_TOPIC`，并选择 `MLBOARD_APNS_ENVIRONMENT=sandbox` 或 `production`。私钥使用 [compose.apns.yml](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/deploy/compose.apns.yml) 的只读 secret 挂载：
+默认 `MLBOARD_APNS_ENABLED=false`，无需私钥或 secret。启用前在 `.env` 中填写 `MLBOARD_APNS_TEAM_ID`、`MLBOARD_APNS_KEY_ID`、`MLBOARD_APNS_TOPIC`，并选择 `MLBOARD_APNS_ENVIRONMENT=sandbox` 或 `production`。私钥使用 [compose.apns.yml](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/deploy/compose.apns.yml) 的只读 secret 挂载：
 
 ```sh
 export MLBOARD_APNS_PRIVATE_KEY_FILE=/absolute/private/path/AuthKey.p8

@@ -1,4 +1,4 @@
-> 来源：[server/docs/history-point-query-plan.md](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/docs/history-point-query-plan.md) · `73643d8`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
+> 来源：[server/docs/history-point-query-plan.md](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/docs/history-point-query-plan.md) · `15f9b75`。链接已整理；勘误及示例泛化见[来源说明](../../../SOURCES.md)。部署行为以目标实例的 capabilities / registry / schemas 为准。
 
 # SQLite 有界 point count 的查询计划
 
@@ -41,4 +41,4 @@ VDBE 使用 5 键范围 seek。`r.id=?` 绑定同一 `ref.RunID` 后，identity 
 
 Events、Series、原始 Summary、Count/Scan 及 summary worker 的单 Run point 查询，将 identity EXISTS 的相关 Run ID 改为同一个已绑定 Run ID。事务内 `ValidateRunReadRef` 和 SQL 的 project/incarnation 检查均保留；worker 的 chunk、lease、游标和覆盖策略不变。
 
-[查询计划与语义回归](https://github.com/mlboard-dev/server/blob/73643d862b4d6d930e6cfd41bb68acd949ed22df/internal/store/history_plan_test.go) 在真实 SQLite 上同时断言有/无 ANALYZE 的完整范围 seek、常量 identity；两库覆盖重复 selector、200 个 selector、全局 LIMIT、成对 context、primary、session/producer、无 Step、旧 revision 和非法参数。现有 ABA/旧 cursor、原始 summary 与持久投影回归继续使用同一测试环境。
+[查询计划与语义回归](https://github.com/mlboard-dev/server/blob/15f9b7577ce00934246e1e0b7ae219809b1b1590/internal/store/history_plan_test.go) 在真实 SQLite 上同时断言有/无 ANALYZE 的完整范围 seek、常量 identity；两库覆盖重复 selector、200 个 selector、全局 LIMIT、成对 context、primary、session/producer、无 Step、旧 revision 和非法参数。现有 ABA/旧 cursor、原始 summary 与持久投影回归继续使用同一测试环境。
